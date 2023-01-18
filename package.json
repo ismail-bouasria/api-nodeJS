@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ismail-bouasria/api-nodeJS/issues"
   },
-  "homepage": "https://github.com/ismail-bouasria/api-nodeJS#readme"
+  "homepage": "https://github.com/ismail-bouasria/api-nodeJS#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
