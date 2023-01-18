@@ -2,7 +2,10 @@ const express =require('express')
 const app = express()
 const port = 3000
 
-app.get('/',(req,res)=>{
-    res.send('Hello world')
-})
-app.listen(port)
+const usersRoute = require('./Router/Users');
+const groupsRoute = require('./Router/Groups');
+
+app.use('/users', usersRoute);
+app.use('/groups', groupsRoute);
+
+app.listen(port);
