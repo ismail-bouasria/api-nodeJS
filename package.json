@@ -1,0 +1,19 @@
+{
+  "name": "api-nodejs",
+  "version": "1.0.0",
+  "description": "Api sous node.js et Express.js Projet Annuaire",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismail-bouasria/api-nodeJS.git"
+  },
+  "author": "ismail bouasria",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismail-bouasria/api-nodeJS/issues"
+  },
+  "homepage": "https://github.com/ismail-bouasria/api-nodeJS#readme"
+}
