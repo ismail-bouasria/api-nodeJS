@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/', function (req, res) {
     //Permet de recuperer l'infos de tout les users
-    res.send('ok users')
+    res.send('ok users lol')
     res.status(200);
 })
 
