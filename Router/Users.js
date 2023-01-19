@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+
 router.get('/', function (req, res) {
     //Permet de recuperer l'infos de tout les users
     res.send('ok users lol')
@@ -11,12 +12,15 @@ router.post('/register', function (req,res,) {
 
 })
 
-router.post('/login', function (req,res) {
+router.post('/login/:id', function (req,res) {
     //Permet de se connecter
+
 })
 
-router.get('/:id',function (req, res) {
+router.get('/profil/:id',function (req, res) {
     //Permet de recuperer l'info d'un user
+    const id = req.params.id;
+    res.send(`ok ${id}`)
 })
 
 router.get('/myId', function (req, res) {
