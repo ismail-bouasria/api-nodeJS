@@ -2,14 +2,44 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/', function (req, res) {
+router.get('/all', function (req, res) {
     //Permet de recuperer l'infos de tout les users
-    res.send('ok users lol')
-    res.status(200);
+    req.getConnection((erreur,connection)=>{
+        if(erreur){
+            console.log(erreur)
+        }else{
+            connection.query('SELECT * FROM users', [], (erreur, resultat)=>{
+                if(erreur){
+                    console.log(erreur)
+                }else{
+                    res.status(200).send(resultat)
+                }
+            })
+        }
+    })
 })
 
 router.post('/register', function (req,res,) {
-
+// Enregistrer un users
+   let email = 'testlinkapi@test.com'
+    let password = 'testlinkapi'
+    let firstName = 'testlinkapi'
+    let lastName = 'testlinkapi'
+    let idGroupe = 2
+    req.getConnection((erreur,connection)=>{
+        if(erreur){
+            console.log(erreur)
+        }else{
+            let query = ' INSERT INTO `users`(`email`,`password`,`firstname`,`lastname`,`id_groupe`) VALUES (?, ?, ?, ?, ?)'
+            connection.query(query, [email,password,firstName,lastName,idGroupe], (erreur, resultat)=>{
+                if(erreur){
+                    console.log(erreur)
+                }else{
+                    res.status(300).redirect('/all')
+                }
+            })
+        }
+    })
 })
 
 router.post('/login/:id', function (req,res) {
