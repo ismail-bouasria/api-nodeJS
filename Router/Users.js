@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+// config du token
+const jwt = require('jsonwebtoken')
+require('dotenv').config();
 
 router.get('/all', function (req, res) {
     //Permet de recuperer l'infos de tout les users
@@ -42,9 +45,43 @@ router.post('/register', function (req,res,) {
     })
 })
 
-router.post('/login/:id', function (req,res) {
+router.post('/login', function (req,res) {
     //Permet de se connecter
+    let emailInput = 'test1@test.com';
+    let passwordInput = 'test'
+    let login = 'SELECT * FROM `users` WHERE `email` = ? AND `password` = ?'
+    req.getConnection((erreur,connection)=>{
+        if(erreur){
+            console.log(erreur)
+        }else{
+            connection.query(login, [emailInput,passwordInput], (erreur, user)=>{
+                if(erreur){
+                    console.log(erreur)
+                }else{
 
+                   //  Fetch le user depuis la db basé sur les données passées en paramètre
+                    const idUser = user[0]
+                    console.log(idUser)
+                    if (!idUser) {
+                        res.status(401).send('invalid credentials');
+                        return ;
+                    }
+
+                    function generateAccessToken(user) {
+                        return jwt.sign({user}, process.env.ACCESS_TOKEN_SECRET,
+                            { expiresIn: '1800s' });
+                    }
+
+                    const accessToken = generateAccessToken(idUser);
+
+                    res.send({
+                        accessToken,
+                    });
+                     console.log(accessToken)
+                }
+            })
+        }
+    })
 })
 
 router.get('/profil/:id',function (req, res) {

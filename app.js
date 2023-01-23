@@ -1,8 +1,9 @@
 'use strict'
+// configuration de
 const express =require('express')
 const app = express()
-const port = 3000;
-const jwt = require('jsonwebtoken')
+const port = 3000
+
 // Configuration de connexion à la base de donnée
 const mysql = require('mysql');
 const myconnection = require('express-myconnection');
