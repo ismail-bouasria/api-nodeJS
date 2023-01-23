@@ -8,7 +8,7 @@ router.get('/all', function (req, res) {
         if(erreur){
             console.log(erreur)
         }else{
-            connection.query('SELECT * FROM users', [], (erreur, resultat)=>{
+            connection.query('SELECT * FROM `users` JOIN groupes WHERE users.id_groupe = groupes.id', [], (erreur, resultat)=>{
                 if(erreur){
                     console.log(erreur)
                 }else{
@@ -35,7 +35,7 @@ router.post('/register', function (req,res,) {
                 if(erreur){
                     console.log(erreur)
                 }else{
-                    res.status(300).redirect('/all')
+                    res.status(300).send(resultat)
                 }
             })
         }
@@ -50,7 +50,21 @@ router.post('/login/:id', function (req,res) {
 router.get('/profil/:id',function (req, res) {
     //Permet de recuperer l'info d'un user
     const id = req.params.id;
-    res.send(`ok ${id}`)
+    req.getConnection((erreur,connection)=>{
+        if(erreur){
+            console.log(erreur)
+        }else{
+            connection.query('SELECT * FROM `users` WHERE `id`= ?', [id], (erreur, resultat)=>{
+                if(erreur){
+                    console.log(erreur)
+                }else{
+                    res.status(200).send(resultat)
+                }
+            })
+        }
+    })
+
+
 })
 
 router.get('/myId', function (req, res) {
